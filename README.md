@@ -39,11 +39,23 @@ To set up the application on your local server follow the instrunctions below.
     npm install
 ```
 
-### _How to run tests
+### _How to run tests locally
 1. After opening the project in one of the IDEs run by giving
 ``` 
     npm run test
 ```
+
+### _How to run tests in a docker container
+1. Run following command to create a docker container
+``` 
+    docker build -t todo-tests .
+```
+
+2. After successful completion of first step, run following command.
+``` 
+    docker run todo-tests npm run test
+```
+
 
 ## Technologies
 
@@ -52,4 +64,5 @@ To set up the application on your local server follow the instrunctions below.
 * Chai 
 * Axios
 * Cucumber
+* Docker
 

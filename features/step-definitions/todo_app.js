@@ -3,6 +3,7 @@ const {expect, assert} = require('chai')
 const webdriver = require('selenium-webdriver');
 const {By} = require('selenium-webdriver')
 const {Key} = require('selenium-webdriver')
+const chrome = require('selenium-webdriver/chrome')
 
 
 let driver
@@ -10,12 +11,11 @@ let driver
 BeforeAll(function () {
   driver = new webdriver.Builder()
     .forBrowser('chrome')
+    .setChromeOptions(new chrome.Options().addArguments("no-sandbox", "headless"))
     .build();
-  console.log('Inside Before')
   });
 
 AfterAll(function () {
-    console.log('Inside After')
     driver.quit();
   });
 
