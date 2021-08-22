@@ -47,6 +47,17 @@ Feature: Todo Application testing
     When user enter what needs to be done in to the TODO list as "Todo item 4" 
     Then user get one more item in the TODO list 
 
+    Scenario: Markout created todo item as completed 
+
+    Given user browse Todo Application
+    And user on All TODO list
+    When user enter what needs to be done in to the TODO list as "Todo item 5"
+    And user counts initial todo items in TODO list
+    And user mark todo item as completed "Todo item 5"
+    Then user get one more item in the completed TODO list 
+
+
+
 
 
 

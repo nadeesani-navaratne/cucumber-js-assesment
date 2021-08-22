@@ -44,6 +44,18 @@ Given('user counts initial todo items in TODO list', async function () {
   latestCount = await getCount()
 });
 
+Given('user on Completed TODO list', async function () {
+  await driver.findElement(By.xpath('//a[text()="Completed"]')).click()
+});
+
+Given('user on All TODO list', async function () {
+  await driver.findElement(By.xpath('//a[text()="All"]')).click()
+});
+
+
+
+
+
 
 When('user enter the url', {timeout: 60*1000}, async () => {
   await driver.get('https://todomvc.com/examples/react/#/')
@@ -72,8 +84,19 @@ When('user count initial todo item\(s) in TODO list', function () {
   initialCount = driver.findElement(By.xpath('//span[@class="todo-count"]/strong')).getText()
 });
 
-When('user count initial todo item\(s) in TODO list', function () {
-console.log('Testttttttttttttttttttttttttttttttttttttttt')
+When('user mark todo item as completed {string}', async function (todoItem) {
+  item_button= await driver.findElement(By.xpath(`//label[text()="${todoItem}"]/following-sibling::button`))
+  await item_button.click()
+});
+
+When('user enter what needs to be done in to the TODO list as {string} and {string}', async function (todoItem1, todoItem2) {
+  newitem = driver.findElement(By.xpath('//input[@class="new-todo"]'))
+  await newitem.sendKeys(todoItem1,todoItem2)
+  await newitem.sendKeys(Key.ENTER)
+});
+
+When('user goto Completed list', async function () {
+  await driver.findElement(By.xpath('//a[text()="Completed"]')).click()
 });
 
 
@@ -113,4 +136,10 @@ Then('user get one more item in the TODO list', async function () {
   previousCount = latestCount
   latestCount = await getCount()
   expect(latestCount - previousCount).equal(1)
+});
+
+Then('user get one more item in the completed TODO list', async function () {
+  previousCount = latestCount
+  latestCount = await getCount()
+  expect(latestCount-previousCount).equal(-1)
 });
